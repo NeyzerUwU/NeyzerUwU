@@ -1,0 +1,73 @@
+* {
+    padding: 0;
+    margin: 0; /* Aseguramos que no haya márgenes */
+    box-sizing: border-box; /* Para que el padding y el ancho se calculen correctamente */
+}
+
+body {
+    font-family: Arial, sans-serif; /* Define una fuente agradable */
+    text-align: center; /* Centra el texto en el cuerpo */
+}
+
+.titulo-principal {
+    font-size: 2em; /* Tamaño del texto del título principal */
+    margin: 20px 0; /* Espaciado superior e inferior */
+    color: #333; /* Color del texto */
+}
+
+.box {
+    display: flex;
+    width: 90%;
+    margin-left: 9%;
+    gap: 20px; /* Espacio entre las secciones */
+}
+
+
+.box .section2{
+    width: 45%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 400px;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end; /* Alinea el contenido al final de la sección */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    position: relative; /* Para que los elementos en la sección se posicionen correctamente */
+    background: url(imagenes/concepto.jpg) no-repeat;
+    background-size: cover;
+}
+
+.box  .section1{
+    width: 45%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 400px;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end; /* Alinea el contenido al final de la sección */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    position: relative; /* Para que los elementos en la sección se posicionen correctamente */
+    background: url(imagenes/p.webp) no-repeat;
+    background-size: cover;
+
+}
+
+
+.box .section2 h1 {
+  
+    margin-left: 0%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para el texto */
+    padding: 15px; /* Espaciado interno */
+    position: absolute; /* Posicionamiento absoluto */
+    bottom: 0;
+    transform: translateX(-50%); 
+    text-align: center;
+}
+.box .section1 h1{
+    margin-left: 0%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para el texto */
+    padding: 15px; /* Espaciado interno */
+    position: absolute; /* Posicionamiento absoluto */
+    bottom: 0;
+    transform: translateX(-50%); 
+    text-align: center;
+
+}
