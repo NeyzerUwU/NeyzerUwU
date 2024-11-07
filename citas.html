@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Citas Agendadas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-container, .appointments-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .appointment {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .appointment:last-child {
+            border-bottom: none;
+        }
+        header {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="citas.html">Administrador</a></li>
+                <li><a href="citas.html">Ver Citas Agendadas</a></li>
+                <li><a href="calendario.html">Calendario de Citas</a></li>
+                <li><a href="principal.html">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h1>Citas Agendadas</h1>
+    <div class="form-container" id="loginContainer">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+    
+    <div class="appointments-container hidden" id="appointmentsContainer"></div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginContainer = document.getElementById('loginContainer');
+        const appointmentsContainer = document.getElementById('appointmentsContainer');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'admin' && password === 'admin123') {
+                loginContainer.classList.add('hidden');
+                appointmentsContainer.classList.remove('hidden');
+                cargarCitas();
+            } else {
+                alert('Usuario o contraseña incorrectos');
+            }
+        });
+
+        function cargarCitas() {
+            const citas = JSON.parse(localStorage.getItem('citas')) || [];
+            appointmentsContainer.innerHTML = '';
+
+            if (citas.length === 0) {
+                appointmentsContainer.innerHTML = '<p>No hay citas agendadas.</p>';
+                return;
+            }
+
+            citas.forEach((cita) => {
+                const citaDiv = document.createElement('div');
+                citaDiv.classList.add('appointment');
+
+                citaDiv.innerHTML = `
+                    <p><strong>Nombre del paciente:</strong> ${cita.title.split(" - ")[1]}</p>
+                    <p><strong>Tipo de cita:</strong> ${cita.title.split(" - ")[0]}</p>
+                    <p><strong>Fecha y hora:</strong> ${new Date(cita.start).toLocaleString()}</p>
+                    <p><strong>Teléfono:</strong> ${cita.extendedProps.telefono}</p>
+                    <p><strong>Comentarios:</strong> ${cita.extendedProps.comentarios || "N/A"}</p>
+                `;
+
+                appointmentsContainer.appendChild(citaDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarCitas);
+    </script>
+</body>
+</html>

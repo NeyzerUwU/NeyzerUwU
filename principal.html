@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Citas Dentales</title>
+    <link rel="stylesheet" href="estilos1.css"> <!-- Link to CSS file -->
+</head>
+<body>
+    <header>
+        <img src="imagenes/odontologia.png" alt="Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="principal.html">Inicio</a></li>
+                <li><a href="calendario.html">Calendario de Citas</a></li>
+                <li><a href="citas.html">Administrador</a></li> <!-- Enlace al login -->
+                <li><a href="ayuda.html">Ayuda</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h1>Registro de Citas Dentales</h1>
+    
+    <div class="form-container">
+        <h2>Agendar una Cita</h2>
+        <input type="text" id="nombrePaciente" placeholder="Nombre del paciente" required>
+        <input type="text" id="telefono" placeholder="Número de teléfono" required>
+        <select id="tipoCita" required>
+            <option value="">Tipo de cita</option>
+            <option value="Limpieza">Limpieza</option>
+            <option value="Revisión">Revisión</option>
+            <option value="Extracción">Extracción</option>
+            <option value="Tratamiento">Tratamiento</option>
+        </select>
+        <input type="datetime-local" id="startTime" required>
+        <textarea id="comentarios" rows="3" placeholder="Comentarios adicionales"></textarea>
+        <button onclick="agendarCita()">Registrar Cita</button>
+        
+    </div>
+
+    <script src="funciones.js"></script> <!-- Link to JavaScript file -->
+</body>
+</html>

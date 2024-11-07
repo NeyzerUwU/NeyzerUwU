@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas Ocupadas y Disponibles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .cita {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            max-width: 600px;
+            background-color: #f9f9f9;
+        }
+        .disponible {
+            background-color: #d4edda; /* Color verde claro para citas disponibles */
+        }
+        .ocupada {
+            background-color: #f8d7da; /* Color rojo claro para citas ocupadas */
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        header {
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 10px 0;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="citas.html">Administrador</a></li>
+                <li><a href="citas.html">Ver Citas Agendadas</a></li>
+                <li><a href="calendario.html">Calendario de Citas</a></li>
+                <li><a href="principal.html">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Citas Ocupadas y Disponibles</h1>
+   
+    <div id="citasContainer"></div> <!-- Contenedor para las citas -->
+
+    <script>
+        // Obtener citas del localStorage
+        const citas = JSON.parse(localStorage.getItem('citas')) || [];
+
+        // Obtener el contenedor donde se mostrarán las citas
+        const citasContainer = document.getElementById('citasContainer');
+
+        // Verificar si hay citas y mostrarlas
+        if (citas.length > 0) {
+            citas.forEach(cita => {
+                const citaDiv = document.createElement('div');
+                citaDiv.classList.add('cita', 'ocupada'); // Clase ocupada para las citas agendadas
+                citaDiv.innerHTML = `
+                    <h2>Fecha y Hora:</h2>
+                    <p>${new Date(cita.start).toLocaleString('es-ES')}</p>
+                `;
+                citasContainer.appendChild(citaDiv);
+            });
+        } else {
+            // Si no hay citas, mostrar mensaje de disponibilidad
+            const mensaje = document.createElement('div');
+            mensaje.classList.add('cita', 'disponible'); // Clase disponible para mostrar que no hay citas ocupadas
+            mensaje.innerHTML = '<h2>No hay citas ocupadas en este momento.</h2>';
+            citasContainer.appendChild(mensaje);
+        }
+    </script>
+</body>
+</html>
